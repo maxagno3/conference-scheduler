@@ -1,14 +1,14 @@
 class Talk
   def self.register(topic, time_duration)
     if time_duration == 5
-      LigtningTalks.new(topic, time_duration)
+      LigtningTalks
     else
-      NormalTalks.new(topic, time_duration)
-    end
+      NormalTalks
+    end.new(topic, time_duration)
   end
 end
 
-class LigtningTalks
+class LigtningTalks < Talk
   attr_reader :topic, :time_duration
 
   def initialize(topic, time_duration)
@@ -17,7 +17,7 @@ class LigtningTalks
   end
 end
 
-class NormalTalks
+class NormalTalks < Talk
   attr_reader :topic, :time_duration
   
   def initialize(topic, time_duration)
