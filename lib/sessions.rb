@@ -47,6 +47,7 @@ class Sessions
   def print_talks
     *tracks, incomplete_talks = schedule_talks
     tracks.each { |track| show_completed_talks(track) }
+    show_incompleted_talks(incomplete_talks)
   end
 
   def show_completed_talks(track)
@@ -61,5 +62,9 @@ class Sessions
         puts "#{track.afternoon.name} #{time}: #{afternoon_talk.topic}".capitalize
       end
     end
+  end
+
+  def show_incompleted_talks(incomplete_talks)
+    incomplete_talks.each {|incomplete_talk| puts "#{incomplete_talk.topic} talks could not be done today due to schedule being packed."}
   end
 end

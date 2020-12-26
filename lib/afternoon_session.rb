@@ -1,6 +1,6 @@
 class AfternoonSession
-  attr_reader :end_time, :name, :talks, :start_time
-  attr_accessor :remaining_time
+  attr_reader :end_time, :name, :talks
+  attr_accessor :start_time, :remaining_time
 
   def initialize(start_time, end_time)
     @name = "afternoon"
