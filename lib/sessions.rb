@@ -53,10 +53,14 @@ class Sessions
   def show_completed_talks(track)
     if track.morning?(track)
       track.morning.talks.each do |morning_talk|
-        puts "#{track.morning.name} #{track.morning.start_time}: #{morning_talk.topic}".capitalize
+        time = track.morning.start_time.strftime("%H:%M")
+        puts "#{track.morning.name} #{time}: #{morning_talk.topic}".capitalize
       end
     elsif track.afternoon?(track)
-      track.afternoon.talks.each { |afternoon_talk| puts "#{track.afternoon.name}: #{afternoon_talk.topic}".capitalize }
+      track.afternoon.talks.each do |afternoon_talk|
+        time = track.afternoon.start_time.strftime("%H:%M")
+        puts "#{track.afternoon.name} #{time}: #{afternoon_talk.topic}".capitalize
+      end
     end
   end
 end
