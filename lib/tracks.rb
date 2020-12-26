@@ -21,11 +21,15 @@ class Tracks
 
   def add_to_session(talk, is_morning)
     if is_morning
+      talk.start_time = morning.start_time.strftime("%H:%M %p")
       morning.talks << talk
       morning.remaining_time -= talk.time_duration
+      morning.start_time += talk.time_duration
     else
+      talk.start_time = afternoon.start_time.strftime("%H:%M %p")
       afternoon.talks << talk
       afternoon.remaining_time -= talk.time_duration
+      afternoon.start_time += talk.time_duration
     end
   end
 
