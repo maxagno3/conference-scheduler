@@ -42,4 +42,6 @@ end
 
 track1 = Tracks.new("track1")
 track2 = Tracks.new("track2")
-Sessions.new(track1, track2).schedule_talks
+schedule = Sessions.new(track1, track2)
+schedule.schedule_talks
+schedule.print_talks

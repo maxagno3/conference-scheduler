@@ -17,9 +17,9 @@ class Sessions
 
   def add_to_tracks(track, talk)
     if track.morning?(track)
-     track.add_to_session(talk, true)
+      track.add_to_session(talk, true)
     elsif track.afternoon?(track)
-     track.add_to_session(talk, false)
+      track.add_to_session(talk, false)
     else
       incomplete_talks << talk
     end
@@ -36,12 +36,27 @@ class Sessions
       add_to_tracks(track1, talk) if count.even?
       add_to_tracks(track2, talk) if count.odd?
 
-      count += 1 if !talk.kind_of? (LigtningTalks)
+      count += 1 if !talk.is_a? LigtningTalks
 
       qualified_talks.shift
 
       # lightning_talk, normal_talk = qualified_talks.partition { |talk| talk.is_a? LigtningTalks }
     end
     return [track1, track2, incomplete_talks]
+  end
+
+  def print_talks
+    *tracks, incomplete_talks = schedule_talks
+    tracks.each { |track| show_completed_talks(track) }
+  end
+
+  def show_completed_talks(track)
+    if track.morning?(track)
+      track.morning.talks.each do |morning_talk|
+        puts "#{track.morning.name} #{track.morning.start_time}: #{morning_talk.topic}".capitalize
+      end
+    elsif track.afternoon?(track)
+      track.afternoon.talks.each { |afternoon_talk| puts "#{track.afternoon.name}: #{afternoon_talk.topic}".capitalize }
+    end
   end
 end
